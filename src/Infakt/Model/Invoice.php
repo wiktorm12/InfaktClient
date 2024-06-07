@@ -667,4 +667,14 @@ class Invoice implements EntityInterface
 
         return $this;
     }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        $result = json_decode(json_encode($this), true);
+
+        return $result;
+    }
 }
