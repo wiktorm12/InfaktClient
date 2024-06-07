@@ -30,4 +30,11 @@ class Share extends AbstractExtension
 
         return $this;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'valid_until' => $this->validUntil ? $this->validUntil->format('Y-m-d') : null,
+        ];
+    }
 }

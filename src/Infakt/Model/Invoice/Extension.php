@@ -48,4 +48,13 @@ class Extension
 
         return $this;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'payment' => $this->payment->toArray(),
+            'share' => $this->share->toArray(),
+        ];
+    }
+
 }

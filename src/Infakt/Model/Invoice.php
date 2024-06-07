@@ -673,8 +673,41 @@ class Invoice implements EntityInterface
      */
     public function toArray(): array
     {
-        $result = json_decode(json_encode($this), true);
-
-        return $result;
+        return [
+            'id' => $this->id,
+            'number' => $this->number,
+            'currency' => $this->currency,
+            'paid_price' => $this->paidPrice,
+            'paid_date' => $this->paidDate ? $this->paidDate->format('Y-m-d H:i:s') : null,
+            'notes' => $this->notes,
+            'kind' => $this->kind,
+            'payment_method' => $this->paymentMethod,
+            'recipient_signature' => $this->recipientSignature,
+            'seller_signature' => $this->sellerSignature,
+            'invoice_date' => $this->invoiceDate ? $this->invoiceDate->format('Y-m-d H:i:s') : null,
+            'sale_date' => $this->saleDate ? $this->saleDate->format('Y-m-d H:i:s') : null,
+            'status' => $this->status,
+            'payment_date' => $this->paymentDate ? $this->paymentDate->format('Y-m-d H:i:s') : null,
+            'net_price' => $this->netPrice,
+            'tax_price' => $this->taxPrice,
+            'gross_price' => $this->grossPrice,
+            'client_id' => $this->clientId,
+            'client_company_name' => $this->clientCompanyName,
+            'client_street' => $this->clientStreet,
+            'client_city' => $this->clientCity,
+            'client_post_code' => $this->clientPostCode,
+            'client_tax_code' => $this->clientTaxCode,
+            'client_country' => $this->clientCountry,
+            'bank_name' => $this->bankName,
+            'bank_account' => $this->bankAccount,
+            'swift' => $this->swift,
+            'sale_type' => $this->saleType,
+            'invoice_date_kind' => $this->invoiceDateKind,
+            'services' => array_map(function (Service $service) {
+                return $service->toArray();
+            }, $this->services),
+            'vat_exemption_reason' => $this->vatExemptionReason,
+            'extensions' => $this->extensions ? $this->extensions->toArray() : null,
+        ];
     }
 }

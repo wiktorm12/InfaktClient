@@ -255,4 +255,22 @@ class Service implements EntityInterface
 
         return $this;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'tax_symbol' => $this->taxSymbol,
+            'unit' => $this->unit,
+            'quantity' => $this->quantity,
+            'unit_net_price' => $this->unitNetPrice,
+            'unit_net_price_before_discount' => $this->unitNetPriceBeforeDiscount,
+            'net_price' => $this->netPrice,
+            'gross_price' => $this->grossPrice,
+            'tax_price' => $this->taxPrice,
+            'symbol' => $this->symbol,
+            'discount' => $this->discount,
+        ];
+    }
 }
