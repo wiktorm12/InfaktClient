@@ -42,7 +42,9 @@ class InvoiceRepository extends AbstractObjectRepository
 
         $query = $this->getServiceName().'.json';
 
-        return $this->infakt->post($query, json_encode($invoice));
+        $mapedInvoice = $this->getMapper()->map($invoice);
+
+        return $this->infakt->post($query, json_encode($mapedInvoice));
     }
 
     /**
