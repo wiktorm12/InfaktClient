@@ -15,7 +15,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 class Infakt
 {
-    const API_ENDPOINT = 'https://api.infakt.pl';
+    protected $api_endpoint;
 
     const API_VERSION = 'v3';
 
@@ -32,8 +32,10 @@ class Infakt
     /**
      * Infakt constructor.
      */
-    public function __construct(string $apiKey, ClientInterface $client = null)
+    public function __construct(string $apiKey, ClientInterface $client = null, bool $prod = true)
     {
+        $this->api_endpoint = $prod ? 'https://api.infakt.pl' :'https://api.sandbox-infakt.pl';
+
         $this->apiKey = $apiKey;
         $this->client = $client instanceof ClientInterface ? $client : new Client();
     }
@@ -85,7 +87,7 @@ class Infakt
      */
     public function buildQuery(string $query): string
     {
-        return self::API_ENDPOINT.'/'.self::API_VERSION.'/'.$query;
+        return $this->api_endpoint.'/'.self::API_VERSION.'/'.$query;
     }
 
     /**
