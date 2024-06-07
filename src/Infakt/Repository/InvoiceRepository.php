@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Infakt\Repository;
 
+use Infakt\Model\EntityInterface;
 use Infakt\Model\Invoice;
 
 class InvoiceRepository extends AbstractObjectRepository
@@ -27,6 +28,21 @@ class InvoiceRepository extends AbstractObjectRepository
         $data = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
 
         return (string) $data['next_number'];
+    }
+
+    /**
+     * Create a new invoice.
+     */
+    public function create(EntityInterface $entity)
+    {
+        $invoice = $entity;
+        if (!$invoice instanceof Invoice) {
+            throw new \InvalidArgumentException('Expected instance of Invoice');
+        }
+
+        $query = $this->getServiceName().'.json';
+
+        return $this->infakt->post($query, json_encode($invoice));
     }
 
     /**
