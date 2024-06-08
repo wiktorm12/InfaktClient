@@ -90,4 +90,18 @@ class VatRate implements EntityInterface
 
         return $this;
     }
+
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'rate' => $this->rate,
+            'name' => $this->name,
+            'symbol' => $this->symbol,
+        ];
+    }
 }

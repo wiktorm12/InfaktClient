@@ -115,4 +115,19 @@ class BankAccount implements EntityInterface
 
         return $this;
     }
+
+
+    /**
+    * @return array
+    */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'bank_name' => $this->bankName,
+            'account_number' => $this->accountNumber,
+            'swift' => $this->swift,
+            'default' => $this->default,
+        ];
+    }
 }

@@ -70,9 +70,28 @@ abstract class AbstractObjectRepository implements ObjectRepositoryInterface
         return $this->match($criteria);
     }
 
+    /**
+     * Create a new invoice.
+     */
     public function create(EntityInterface $entity)
     {
-        // To implement
+        $query = $this->getServiceName().'.json';
+
+        $entityJson = json_encode($entity->toArray());
+
+        return $this->infakt->post($query, $entityJson);
+    }
+
+    /**
+     * Create async a new invoice.
+     */
+    public function createAsync(EntityInterface $entity)
+    {
+        $query = 'async/'.$this->getServiceName().'.json';
+
+        $entityJson = json_encode($entity->toArray());
+
+        return $this->infakt->post($query, $entityJson);
     }
 
     /**

@@ -31,23 +31,6 @@ class InvoiceRepository extends AbstractObjectRepository
     }
 
     /**
-     * Create a new invoice.
-     */
-    public function create(EntityInterface $entity)
-    {
-        $invoice = $entity;
-        if (!$invoice instanceof Invoice) {
-            throw new \InvalidArgumentException('Expected instance of Invoice');
-        }
-
-        $query = $this->getServiceName().'.json';
-
-        $mapedInvoice = $this->getMapper()->map($invoice);
-
-        return $this->infakt->post($query, json_encode($mapedInvoice));
-    }
-
-    /**
      * Mark an invoice as paid.
      */
     public function markAsPaid(Invoice $invoice, \DateTime $paidDate = null): void

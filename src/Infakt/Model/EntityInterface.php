@@ -14,4 +14,6 @@ interface EntityInterface
      * @return $this
      */
     public function setId(int $id);
+
+    public function toArray(): array;
 }

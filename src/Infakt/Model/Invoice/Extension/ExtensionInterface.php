@@ -13,4 +13,6 @@ interface ExtensionInterface
     public function isAvailable(): bool;
 
     public function setAvailable(bool $isAvailable);
+
+    public function toArray(): array;
 }

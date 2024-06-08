@@ -395,4 +395,33 @@ class Client implements EntityInterface
 
         return $this;
     }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'company_name' => $this->companyName,
+            'street' => $this->street,
+            'city' => $this->city,
+            'country' => $this->country,
+            'postal_code' => $this->postalCode,
+            'nip' => $this->nip,
+            'phone_number' => $this->phoneNumber,
+            'same_forward_address' => $this->sameForwardAddress,
+            'website' => $this->website,
+            'email' => $this->email,
+            'note' => $this->note,
+            'receiver' => $this->receiver,
+            'mailing_company_name' => $this->mailingCompanyName,
+            'mailing_street' => $this->mailingStreet,
+            'mailing_city' => $this->mailingCity,
+            'mailing_postal_code' => $this->mailingPostalCode,
+            'days_to_payment' => $this->daysToPayment,
+            'invoice_note' => $this->invoiceNote,
+            'payment_method' => $this->paymentMethod,
+        ];
+    }
 }
+
