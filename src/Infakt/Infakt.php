@@ -83,6 +83,14 @@ class Infakt
     }
 
     /**
+     * Send HTTP PUT request.
+     */
+    public function put(string $query, ?string $body = null): ResponseInterface
+    {
+        return $this->request('put', $query, $body);
+    }
+
+    /**
      * Attach endpoint URL to the query.
      */
     public function buildQuery(string $query): string

@@ -95,6 +95,19 @@ abstract class AbstractObjectRepository implements ObjectRepositoryInterface
     }
 
     /**
+     * Update an entity.
+     */
+
+    public function update(EntityInterface $entity): ResponseInterface  
+    {
+        $query = $this->getServiceName().'/'.$entity->getId().'.json';
+
+        $entityJson = json_encode($entity->toArray());
+
+        return $this->infakt->put($query, $entityJson);
+    }
+
+    /**
      * Delete an entity.
      */
     public function delete(EntityInterface $entity): ResponseInterface
