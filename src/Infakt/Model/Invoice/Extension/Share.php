@@ -33,8 +33,12 @@ class Share extends AbstractExtension
 
     public function toArray(): array
     {
-        return [
+        $arrayResult = [
             'valid_until' => $this->validUntil ? $this->validUntil->format('Y-m-d') : null,
         ];
+
+        return array_filter($arrayResult, static function ($value) {
+            return null !== $value;
+        });
     }
 }

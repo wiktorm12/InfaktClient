@@ -51,10 +51,14 @@ class Extension
 
     public function toArray(): array
     {
-        return [
+        $arrayResult = [
             'payment' => $this->payment->toArray(),
             'share' => $this->share->toArray(),
         ];
+
+        return array_filter($arrayResult, static function ($value) {
+            return null !== $value;
+        });
     }
 
 }

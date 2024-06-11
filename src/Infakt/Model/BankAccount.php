@@ -122,12 +122,16 @@ class BankAccount implements EntityInterface
     */
     public function toArray(): array
     {
-        return [
+        $arrayResult = [
             'id' => $this->id,
             'bank_name' => $this->bankName,
             'account_number' => $this->accountNumber,
             'swift' => $this->swift,
             'default' => $this->default,
         ];
+        
+        return array_filter($arrayResult, static function ($value) {
+            return null !== $value;
+        });
     }
 }

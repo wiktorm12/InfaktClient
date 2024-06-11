@@ -97,11 +97,15 @@ class VatRate implements EntityInterface
      */
     public function toArray(): array
     {
-        return [
+        $arrayResult = [
             'id' => $this->id,
             'rate' => $this->rate,
             'name' => $this->name,
             'symbol' => $this->symbol,
         ];
+
+        return array_filter($arrayResult, static function ($value) {
+            return null !== $value;
+        });
     }
 }

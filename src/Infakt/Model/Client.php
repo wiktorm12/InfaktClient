@@ -401,7 +401,7 @@ class Client implements EntityInterface
      */
     public function toArray(): array
     {
-        return [
+        $arrayResult = [
             'company_name' => $this->companyName,
             'street' => $this->street,
             'city' => $this->city,
@@ -422,6 +422,10 @@ class Client implements EntityInterface
             'invoice_note' => $this->invoiceNote,
             'payment_method' => $this->paymentMethod,
         ];
+
+        return array_filter($arrayResult, static function ($value) {
+            return null !== $value;
+        });
     }
 }
 

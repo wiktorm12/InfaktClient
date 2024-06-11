@@ -258,7 +258,7 @@ class Service implements EntityInterface
 
     public function toArray(): array
     {
-        return [
+        $arrayResult = [
             'id' => $this->id,
             'name' => $this->name,
             'tax_symbol' => $this->taxSymbol,
@@ -272,5 +272,9 @@ class Service implements EntityInterface
             'symbol' => $this->symbol,
             'discount' => $this->discount,
         ];
+
+        return array_filter($arrayResult, static function ($value) {
+            return null !== $value;
+        });
     }
 }
