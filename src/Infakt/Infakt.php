@@ -107,6 +107,7 @@ class Infakt
         $options = [
             'headers' => [
                 'X-inFakt-ApiKey' => $this->apiKey,
+                'Content-Type' => 'application/json',
             ],
         ];
 
