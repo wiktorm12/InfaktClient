@@ -6,6 +6,7 @@ namespace Infakt;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Psr7\Request;
 use Infakt\Exception\LogicException;
 use Infakt\Repository\AbstractObjectRepository;
 use Psr\Http\Message\ResponseInterface;
@@ -77,7 +78,7 @@ class Infakt
     /**
      * Send HTTP POST request.
      */
-    public function post(string $query, ?string $body = null): ResponseInterface
+    public function post(string $query, ?array $body = null): ResponseInterface
     {
         return $this->request('post', $query, $body);
     }
@@ -85,7 +86,7 @@ class Infakt
     /**
      * Send HTTP PUT request.
      */
-    public function put(string $query, ?string $body = null): ResponseInterface
+    public function put(string $query, ?array $body = null): ResponseInterface
     {
         return $this->request('put', $query, $body);
     }
@@ -101,7 +102,7 @@ class Infakt
     /**
      * Prepare and perform HTTP request through the client.
      */
-    public function request(string $method, string $query, ?string $body = null): ResponseInterface
+    public function request(string $method, string $query, ?array $body = null): ResponseInterface
     {
         $options = [
             'headers' => [
@@ -110,7 +111,7 @@ class Infakt
         ];
 
         if ($body) {
-            $options['body'] = $body;
+            $options['json'] = $body;
         }
 
         return $this->client->request($method, $this->buildQuery($query), $options);

@@ -91,7 +91,7 @@ abstract class AbstractObjectRepository implements ObjectRepositoryInterface
     {
         $query = 'async/'.$this->getServiceName().'.json';
 
-        $entityJson = json_encode($entity->toArray());
+        $entityJson = $entity->toArray();
 
         return $this->infakt->post($query, $entityJson);
     }
@@ -104,7 +104,7 @@ abstract class AbstractObjectRepository implements ObjectRepositoryInterface
     {
         $query = $this->getServiceName().'/'.$entity->getId().'.json';
 
-        $entityJson = json_encode($entity->toArray());
+        $entityJson = $entity->toArray();
 
         return $this->infakt->put($query, $entityJson);
     }
