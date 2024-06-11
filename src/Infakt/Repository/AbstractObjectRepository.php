@@ -73,13 +73,15 @@ abstract class AbstractObjectRepository implements ObjectRepositoryInterface
     /**
      * Create a new invoice.
      */
-    public function create(EntityInterface $entity)
+    public function create(EntityInterface $entity) : EntityInterface
     {
         $query = $this->getServiceName().'.json';
 
         $entityJson = json_encode($entity->toArray());
 
-        return $this->infakt->post($query, $entityJson);
+        $response =  $this->infakt->post($query, $entityJson);
+
+        return $this->getMapper()->map(\GuzzleHttp\json_decode($response->getBody()->getContents(), true));
     }
 
     /**
