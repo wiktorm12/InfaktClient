@@ -673,7 +673,7 @@ class Invoice implements EntityInterface
      */
     public function toArray(): array
     {
-        return [
+        $arrayResult = [
             'id' => $this->id,
             'number' => $this->number,
             'currency' => $this->currency,
@@ -709,5 +709,9 @@ class Invoice implements EntityInterface
             'vat_exemption_reason' => $this->vatExemptionReason,
             'extensions' => $this->extensions ? $this->extensions->toArray() : null,
         ];
+
+        return array_filter($arrayResult, function ($value) {
+            return null !== $value;
+        });
     }
 }
