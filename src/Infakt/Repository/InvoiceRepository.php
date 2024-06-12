@@ -7,6 +7,22 @@ namespace Infakt\Repository;
 use Infakt\Model\EntityInterface;
 use Infakt\Model\Invoice;
 
+enum DownloadInvoiceType: string {
+    case original = "original";
+    case copy = "copy";
+    case original_duplicate = "original_duplicate";
+    case copy_duplicate = "copy_duplicate";
+    case duplicate = "duplicate";
+    case regular = "regular";
+    case double_regular = "double_regular";
+}
+
+enum DownloadInvoiceLang: string {
+    case pl = "pl";
+    case en = "en";
+    case pe = "pe";
+}
+
 class InvoiceRepository extends AbstractObjectRepository
 {
     /**
@@ -37,5 +53,17 @@ class InvoiceRepository extends AbstractObjectRepository
     {
         $query = $this->getServiceName().'/'.$invoice->getId().'/paid.json';
         $this->infakt->post($query);
+    }
+
+    /**
+     * Download an invoice as a PDF file.
+     */
+
+    public function downloadPdf(Invoice $invoice, DownloadInvoiceType $document_type = DownloadInvoiceType::original, DownloadInvoiceLang $lang = DownloadInvoiceLang::pl): string
+    {
+        $query = $this->getServiceName().'/'.$invoice->getId()."/pdf.pdf?document_type=".$document_type."&lang=".$lang;
+        $response = $this->infakt->get($query);
+
+        return $response->getBody()->getContents();
     }
 }
