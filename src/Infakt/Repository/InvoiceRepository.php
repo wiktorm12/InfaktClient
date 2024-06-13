@@ -61,7 +61,7 @@ class InvoiceRepository extends AbstractObjectRepository
 
     public function downloadPdf(Invoice $invoice, DownloadInvoiceType $document_type = DownloadInvoiceType::original, DownloadInvoiceLang $lang = DownloadInvoiceLang::pl): string
     {
-        $query = $this->getServiceName().'/'.$invoice->getId()."/pdf.pdf?document_type=".$document_type."&lang=".$lang;
+        $query = $this->getServiceName().'/'.$invoice->getId()."/pdf.json?document_type=".$document_type->value."&lang=".$lang->value;
         $response = $this->infakt->get($query);
 
         return $response->getBody()->getContents();
